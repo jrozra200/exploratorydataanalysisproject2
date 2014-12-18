@@ -1,0 +1,295 @@
+x <- split(iris, iris$Species)
+x
+mean(x$virginica["Sepal.Length"])
+y <- x$virginica
+head(y)
+mean(y$Sepal.Length)
+tapply(mtcars$mpg, mtcars$cyl, mean)
+26.66364 - 15.1
+head(mtcars)
+tapply(mtcars$hp, mtcars$cyl, mean)
+209.21429 - 82.63636
+tapply(iris$Sepal.Length, iris$Species, mean)
+library(swirl)
+install_from_swirl("Getting and Cleaning Data")
+swirl()
+mydf <- read.csv(path2csv, stringsAsFactors = FALSE)
+dim(mydf)
+head(mydf)
+library(dplyr)
+packageVersion("dplyr")
+cran <- tbl_df(mydf)
+rm("mydf")
+cran
+?select
+select(cran, ip_id, package, country)
+5:20
+select(cran, r_arch:country)
+select(cran, country:r_arch)
+cran
+select(cran, -time)
+-5:20
+-(5:20)
+select(cran, -(X:size))
+filter(cran, package == "swirl")
+filter(cran, r_version == "3.1.1", country == "US")
+?Comparison
+filter(cran, r_version <= "3.0.2", country == "IN")
+filter(cran, country == "US | country == "IN")
+filter(cran, country == "US" | country == "IN")
+filter(cran, size > 100500, r_os == "linux-gnu")
+is.na(c(3, 5, NA, 10))
+!is.na(c(3, 5, NA, 10))
+filter(cran, !(is.na(r_version)))
+filter(cran, !is.na(r_version))
+select(cran, size:ip_id)
+cran2 <- select(cran, size:ip_id)
+arrange(cran2, ip_id)
+arrange(cran2, desc(ip_id))
+arrange(cran2, package, ip_id)
+arrange(cran2, country, desc(r_version) ip_id)
+arrange(cran2, country, desc(r_version), ip_id)
+cran3 <- select(cran, ip_id, package, size)
+cran3
+mutate(cran3, size_mb = size / 2^20)
+mutate(cran3, size_mb = size / 2^20, size_gb = size / 2^10)
+mutate(cran3, size_mb = size / 2^20, size_gb = size_mb / 2^10)
+mutate(cran3, size_mb = size / 2^20, size_gb = size_mb / 2^10, correct_size = size - 1000)
+mutate(cran3, correct_size = size - 1000)
+mutate(cran3, correct_size = size + 1000)
+summarize(cran, avg_bytes = mean(size))
+swirl()
+library(swirl)
+swirl()
+library(dplyer)
+library(dplyr)
+cran <- tbl_df(mydf)
+rm("mydf")
+cran
+?group_by
+by_package <- group_by(cran, package)
+by_package
+summarize(by_package, mean(size))
+?n
+submit()
+pack_sum
+quantile(pack_sum$count, probs = 0.99)
+top_counts <- filter(pack_sum, count > 679)
+top_counts
+head(top_counts, 20)
+arrange(top_counts, count)
+arrange(top_counts, desc(count))
+quantile(pack_sum$unique, probs = 0.99)
+top_unique <- filter(pack_sum, unique > 465)
+top_unique
+arrange(pack_sum, desc(unique))
+arrange(top_unique, desc(unique))
+submit()
+library(swirl)
+swirl()
+submit()
+?spread
+reset()
+submit()
+skip()
+extract_numeric("class5")
+submit()
+?mutate
+submit()
+students4
+submit()
+passed
+failed
+passed <- mutate(passed, "passed")
+passed <- passed %>% mutate(status = "passed")
+failed <- failed %>% mutate(status = "failed")
+rbind_list(passed, failed)
+sat
+?select
+?separate
+submit()
+?group_by
+submit()
+install.packages("RMySQL")
+library(RMySQL)
+install.packages("RMySQL")
+source("http://bioconductor.org/bioclite.R")
+source("http://bioconductor.org/biocLite.R")
+biocLite("rhdf5")
+library(rdhf5)
+library(rhdf5)
+InsectSprays
+with(InsectSprays, tappy(count, spray, mean))
+with(InsectSprays, tapply(count, spray, mean))
+with(InsectSprays, by(count, spray, mean))
+aggregate(count ~ spray, InsectSprays, mean)
+with(InsectSprays, split(count, spray))
+?text
+?postscript
+install.packages("twittR")
+library(lattice)
+x <- rnorm(100)
+y <- rnorm(100)
+xyplot(x,y)
+xyplot(x, y)
+xyplot(y ~ x| f * g)
+?xyplot
+library(nlme)#
+library(lattice)#
+xyplot(weight ~ Time | Diet, BodyWeight)
+x <- xyplot(weight ~ Time | Diet, BodyWeight)
+class(x)
+?lines
+?points
+?llines
+library(lattice)#
+library(datasets)#
+data(airquality)#
+p <- xyplot(Ozone ~ Wind | factor(Month), data = airquality)
+p
+?trellis.par.set
+?print.trellis
+?splom
+?par
+qplot(Wind, Ozone, data = airquality, facets = . ~ factor(Month))
+library(ggplot2)
+install.packages("ggplot2")
+library(ggplot2)
+qplot(Wind, Ozone, data = airquality, facets = . ~ factor(Month))
+qplot(Wind, Ozone, data = airquality)
+airquality = transform(airquality, Month = factor(Month))#
+qplot(Wind, Ozone, data = airquality, facets = . ~ Month)
+?geom
+g <- ggplot(movies, aes(votes, rating))#
+print(g)
+qplot(votes, rating, data = movies)
+qplot(votes, rating, data = movies) + geom_smooth()
+library(Rfacebook)
+library(devtools)
+load("FBcredentials.RData")
+Rfacebook
+library(Rfacebook)
+Rfacebook
+NEI <- readRDS("./exdata-data-NEI_data/summarySCC_PM25.rds")#
+SCC <- readRDS("./exdata-data-NEI_data/Source_Classification_Code.rds")
+head(NEI)
+head(SCC)
+total <- merge(NEI, SCC, by = "SCC")
+head(total)
+y1999 <- NEI[NEI$year == 1999]
+y1999 <- NEI[NEI$year == 1999, ]
+unique(NEI$year)
+tapply(NEI$Emissions, NEI$year, sum)
+overalltrend <- tapply(NEI$Emissions, NEI$year, sum)
+rownames(overalltrend) <- c("year", "emissions")
+dim(overalltrend)
+class(overalltrend)
+test <- as.data.frame(overalltrend)
+test
+colnames(test) <- c("Year", "Total Emissions")
+dim(test)
+unlist(overalltrend)
+class(unlist(overalltrend))
+library(plyr)
+class(NEI)
+ddply(NEI, year ~ emissions, sum)
+ddply(NEI, year ~ Emissions, sum)
+ddply(NEI, Emissions ~ year, sum)
+ddply(NEI, year, summarize, sum = sum(Emissions))
+ddply(NEI, .(year), summarize, sum = sum(Emissions))
+overalltrend <- ddply(NEI, .(year), summarize, sum = sum(Emissions))
+plot(year, sum)
+plot(overalltrend$year, overallyear$sum)
+plot(overalltrend$year, overalltrend$sum)
+plot(overalltrend$year, overalltrend$sum, pch = ".", xlab = "YEAR", ylab = "Overall Emissions")
+lines(overalltrend$year, overalltrend$sum)
+title(main = "Overall Emissions by Year")
+baltimore <- NEI[NEI$fips == "24510", ]
+head(baltimore)
+overalltrend <- ddply(baltimore, .(year), summarize, sum = sum(Emissions))
+plot(overalltrend$year, overalltrend$sum, pch = ".", xlab = "YEAR", ylab = "Overall Emissions")#
+        lines(overalltrend$year, overalltrend$sum)#
+        title(main = "Overall Emissions by Year (for Baltimore)")
+baltimorepoint <- baltimore[baltimore$type == "POINT", ]
+head(baltimorepoint)
+baltimorenonpoint <- baltimore[baltimore$type == "NONPOINT", ]
+head(baltimorenonpoint)
+baltimoreonroad <- baltimore[baltimore$type == "ONROAD", ]#
+        baltimorenonroad <- baltimore[baltimore$type == "NONROAD", ]
+pointtrend <- ddply(baltimorepoint, .(year), summarize, sum = sum(Emissions))#
+        nonpointtrend <- ddply(baltimorenonpoint, .(year), summarize, sum = sum(Emissions))#
+        onroadtrend <- ddply(baltimoreonroad, .(year), summarize, sum = sum(Emissions))#
+        nonroadtrend <- ddply(baltimorenonroad, .(year), summarize, sum = sum(Emissions))
+pointtrend
+library(ggplot2)
+ggplot(baltimore, aes(year, Emissions)) + geom_point() + facet_grid(.(type))
+ggplot(baltimore, aes(year, Emissions)) + geom_point() + facet_grid(Emissions ~ type))
+ggplot(baltimore, aes(year, Emissions)) + geom_point() + facet_grid(Emissions ~ type)
+mfrow(2, 2)
+par(mfrow(2, 2))
+par(mfrow = c(2, 2))
+ggplot(pointtrend, aes(year, sum)) + geom_point()
+pointplot <- ggplot(pointtrend, aes(year, sum)) + geom_point()#
+        nonpointplot <- ggplot(nonpointtrend, aes(year, sum)) + geom_point()#
+        onroadplot <- ggplot(onroadtrend, aes(year, sum)) + geom_point()#
+        nonroadplot <- ggplot(onroadtrend, aes(year, sum)) + geom_point()
+library(grid)
+pushViewport(viewport(layout = grid.layout(2, 2)))
+print(pointplot, vp = viewport(layout.pos.row = 1, layout.pos.col = 1))
+print(nonpointplot, vp = viewport(layout.pos.row = 1, layout.pos.col = 2))
+print(onroadplot, vp = viewport(layout.pos.row = 2, layout.pos.col = 1))
+print(nonroadplot, vp = viewport(layout.pos.row = 2, layout.pos.col = 2))
+pointplot <- ggplot(pointtrend, aes(year, sum)) + geom_line()#
+        nonpointplot <- ggplot(nonpointtrend, aes(year, sum)) + geom_point()#
+        onroadplot <- ggplot(onroadtrend, aes(year, sum)) + geom_point()#
+        nonroadplot <- ggplot(onroadtrend, aes(year, sum)) + geom_point()
+print(pointplot, vp = viewport(layout.pos.row = 1, layout.pos.col = 1))
+pointtrend <- ddply(baltimorepoint, .(year), summarize, sum = sum(Emissions))#
+        pointtrend <- cbind(pointtrend, type = "POINT")
+pointtrend
+pointtrend <- ddply(baltimorepoint, .(year), summarize, sum = sum(Emissions))#
+        pointtrend <- cbind(pointtrend, type = "POINT")#
+        nonpointtrend <- ddply(baltimorenonpoint, .(year), summarize, sum = sum(Emissions))#
+        nonpointtrend <- cbind(nonpointtrend, type = "NONPOINT")#
+        onroadtrend <- ddply(baltimoreonroad, .(year), summarize, sum = sum(Emissions))#
+        onroadtrend <- cbind(pointtrend, type = "ONROAD")#
+        nonroadtrend <- ddply(baltimorenonroad, .(year), summarize, sum = sum(Emissions))#
+        nonroadtrend <- cbind(nonroadtrend, type = "NONROAD")#
+        bmorebreakdown <- rbind(pointtrend, nonpointtrend, onroadtrend, nonroadtrend)
+nonpointtrend <- ddply(baltimorenonpoint, .(year), summarize, sum = sum(Emissions))#
+        nonpointtrend <- cbind(nonpointtrend, type = "NONPOINT")
+onroadtrend <- ddply(baltimoreonroad, .(year), summarize, sum = sum(Emissions))#
+        onroadtrend <- cbind(pointtrend, type = "ONROAD")
+nonroadtrend <- ddply(baltimorenonroad, .(year), summarize, sum = sum(Emissions))#
+        nonroadtrend <- cbind(nonroadtrend, type = "NONROAD")
+onroadtrend <- ddply(baltimoreonroad, .(year), summarize, sum = sum(Emissions))#
+        onroadtrend <- cbind(onroadtrend, type = "ONROAD")
+onroadtrend
+baltimoreonroad
+baltimore[baltimore$type == "ONROAD}", ]
+unique(baltimore$type)
+baltimore <- NEI[NEI$fips == "24510", ]#
+        baltimorepoint <- baltimore[baltimore$type == "POINT", ]#
+        baltimorenonpoint <- baltimore[baltimore$type == "NONPOINT", ]#
+        baltimoreonroad <- baltimore[baltimore$type == "ON-ROAD", ]#
+        baltimorenonroad <- baltimore[baltimore$type == "NON-ROAD", ]#
+        pointtrend <- ddply(baltimorepoint, .(year), summarize, sum = sum(Emissions))#
+        pointtrend <- cbind(pointtrend, type = "POINT")#
+        nonpointtrend <- ddply(baltimorenonpoint, .(year), summarize, sum = sum(Emissions))#
+        nonpointtrend <- cbind(nonpointtrend, type = "NONPOINT")#
+        onroadtrend <- ddply(baltimoreonroad, .(year), summarize, sum = sum(Emissions))#
+        onroadtrend <- cbind(onroadtrend, type = "ON-ROAD")#
+        nonroadtrend <- ddply(baltimorenonroad, .(year), summarize, sum = sum(Emissions))#
+        nonroadtrend <- cbind(nonroadtrend, type = "NON-ROAD")
+bmorebreakdown <- rbind(pointtrend, nonpointtrend, onroadtrend, nonroadtrend)
+bmorebreakdown
+qplot(year, sum, data = bmorebreakdown, facets = ~.type)
+qplot(year, sum, data = bmorebreakdown, facets = .~type)
+bmorebreakdownplot <- ggplot(bmorebreakdown, aes(year, sum)) + geom_line() + facet_grid(.~type)
+print(bmorebreakdownplot)
+bmorebreakdownplot <- ggplot(bmorebreakdown, aes(year, sum)) + geom_line() + facet_grid(.~type) + labs(x = "Year", y = "Overall Emissions") + labs(title = "Overall Emissions by Year by Type")
+print(bmorebreakdownplot)
+bmorebreakdownplot <- ggplot(bmorebreakdown, aes(year, sum)) + geom_line() + facet_wrap(.~type, nrow = 2, ncol = 2) + labs(x = "Year", y = "Overall Emissions") + labs(title = "Overall Emissions by Year by Type")
+print(bmorebreakdownplot)
+bmorebreakdownplot <- ggplot(bmorebreakdown, aes(year, sum)) + geom_line() + facet_grid(.~type) + facet_wrap(.~type, nrow = 2, ncol = 2) + labs(x = "Year", y = "Overall Emissions") + labs(title = "Overall Emissions by Year by Type")
+print(bmorebreakdownplot)
